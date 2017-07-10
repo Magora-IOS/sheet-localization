@@ -7,10 +7,6 @@ import gspread
 # TODO: oauth2client is deprecated. Use recommended google-auth
 from oauth2client.service_account import ServiceAccountCredentials
 
-IOS_LOCALIZATION_FILE_NAME_MASK = "Localizable-{0}.strings"
-IOS_CONSTANTS_HEADER_FILE_NAME = "LocalizationConstants.h"
-#IOS_CONSTANTS_SOURCE_FILE_NAME = "LocalizationConstants.m"
-
 USAGE = """
 Usage: {0} /path/to/google_credentials.json SPREADSHEET_NAME TARGET
     
@@ -53,6 +49,7 @@ if (targetName == "android"):
     print("TODO: generate Android files")
 elif (targetName == "ios"):
     iosGenerateLocalizationFiles(translations, languages)
+    iosGenerateConstantsFiles(translations, languages)
 else:
     print("ERROR: Unknown target")
     sys.exit(1)
