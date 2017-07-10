@@ -31,6 +31,13 @@ cfg = configurationFromPage(cfgPage)
 
 print("Reading source page")
 srcPage = spreadsheet.sheet("SRC")
-translations = parsePage(srcPage, cfg)
+(languages, translations) = parsePage(srcPage, cfg)
+print("Found languages: '{0}'".format(languages))
 
-print("Translations: '{0}'".format(translations))
+for tr in translations:
+    print("Android key: '{0}'".format(tr.androidKey))
+    print("iOS key: '{0}'".format(tr.iosKey))
+    print("Translations: '{0}'".format(tr.translations))
+
+#print("Translations: '{0}'".format(translations))
+

@@ -1,4 +1,6 @@
 
+from Translation import Translation
+
 CFG_KEY_ID = 0
 CFG_VALUE_ID = 1
 CFG_KEY_VALUE_COLUMNS_NB = 2
@@ -24,14 +26,31 @@ def parsePage(page, cfg):
 
     # Get list of languages.
     languagesRowId = int(cfg["LANGUAGES_ROW"]) - 1
-    row = raw[languagesRowId]
-    languagesNb = len(row)
+    langRow = raw[languagesRowId]
+    languagesNb = len(langRow)
     languages = []
     for columnId in range(translationsColumnId, languagesNb):
         languages.append(raw[languagesRowId][columnId])
-    print("Found languages: '{0}'".format(languages))
-    translations = []
 
-    return translations
+    translations = []
+    translationRowId = int(cfg["TRANSLATION_ROW"]) - 1
+    # Key column ids.
+    androidKeyColumnId = int(cfg["ANDROID_KEY_COLUMN"]) - 1
+    iosKeyColumnId = int(cfg["IOS_KEY_COLUMN"]) - 1
+    # Parse translations.
+    for rowId in range(0, len(raw)):
+        # Skip non-translation rows.
+        if (rowId < translationRowId):
+            continue
+        tr = Translation()
+        # Get keys.
+        tr.androidKey = raw[rowId][androidKeyColumnId]
+        tr.iosKey = raw[rowId][iosKeyColumnId]
+        # Get translations.
+        for columnId in range(translationsColumnId, languagesNb):
+            tr.translations.append(raw[rowId][columnId])
+        translations.append(tr)
+
+    return (languages, translations)
 
 
