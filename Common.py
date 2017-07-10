@@ -32,12 +32,13 @@ def parsePage(page, cfg):
     for columnId in range(translationsColumnId, languagesNb):
         languages.append(raw[languagesRowId][columnId])
 
-    translations = []
     translationRowId = int(cfg["TRANSLATION_ROW"]) - 1
     # Key column ids.
     androidKeyColumnId = int(cfg["ANDROID_KEY_COLUMN"]) - 1
     iosKeyColumnId = int(cfg["IOS_KEY_COLUMN"]) - 1
+
     # Parse translations.
+    translations = []
     for rowId in range(0, len(raw)):
         # Skip non-translation rows.
         if (rowId < translationRowId):
@@ -48,7 +49,7 @@ def parsePage(page, cfg):
         tr.iosKey = raw[rowId][iosKeyColumnId]
         # Get translations.
         for columnId in range(translationsColumnId, languagesNb):
-            # NOTE The use of "utf-8" fixes the following error:
+            # NOTE The use of encode("utf-8") fixes the following error:
             # NOTE UnicodeEncodeError: 'ascii' codec can't encode characters in position 0-6: ordinal not in range(128)
             tr.translations.append(raw[rowId][columnId].encode("utf-8"))
         translations.append(tr)
