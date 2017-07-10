@@ -1,4 +1,5 @@
 
+from Common import *
 from Spreadsheet import Spreadsheet
 
 import sys
@@ -20,9 +21,16 @@ scope = ["https://spreadsheets.google.com/feeds"]
 credentials = ServiceAccountCredentials.from_json_keyfile_name(credentialsFileName, scope)
 client = gspread.authorize(credentials)
 
-# Open spread sheet and necessary pages.
+print("Opening spreadsheet")
 spreadsheet = Spreadsheet(client)
 spreadsheet.open(documentName)
-srcPage = spreadsheet.sheet("SRC")
-cfgPage = spreadsheet.sheet("CFG")
 
+print("Reading configuration page")
+cfgPage = spreadsheet.sheet("CFG")
+cfg = configurationFromPage(cfgPage)
+
+print("Reading source page")
+srcPage = spreadsheet.sheet("SRC")
+translations = parsePage(srcPage, cfg)
+
+print("Translations: '{0}'".format(translations))
