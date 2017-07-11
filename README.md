@@ -132,7 +132,7 @@ generate iOS localization files with the following commands:
 
 This creates
 
-0. `<lang>.lproj/Localizable.strings` files with contents like this:
+1. `<lang>.lproj/Localizable.strings` files with contents like this:
     ```
     "Menu.Item.History" = "History";
     "Menu.Item.Notifications" = "Notifications";
@@ -144,7 +144,7 @@ This creates
     "Order.Address.Here" = "I'm here";
     "Details.Order" = "Order";
     ```
-0. `LocalizationConstants.h` file with contents:
+1. `LocalizationConstants.h` file with contents:
     ```
     /*!
     * @b en@: History
@@ -166,16 +166,16 @@ This creates
     */
     extern NSString * const trMenuItemNotifications;
     ```
-0. `LocalizationConstants.m` file with contents:
-```
-import "LocalizableConstants.h"
-NSString * const trMenuItemHistory = @"Menu.Item.History";
-NSString * const trMenuItemNotifications = @"Menu.Item.Notifications";
-NSString * const trMenuItemFavourites = @"Menu.Item.Favourites";
-NSString * const trMenuItemAbout = @"Menu.Item.About";
-NSString * const trProfilePhoneTitle = @"Profile.Phone.Title";
-NSString * const trProfileEmailTitle = @"Profile.Email.Title";
-```
+1. `LocalizationConstants.m` file with contents:
+    ```
+    import "LocalizableConstants.h"
+    NSString * const trMenuItemHistory = @"Menu.Item.History";
+    NSString * const trMenuItemNotifications = @"Menu.Item.Notifications";
+    NSString * const trMenuItemFavourites = @"Menu.Item.Favourites";
+    NSString * const trMenuItemAbout = @"Menu.Item.About";
+    NSString * const trProfilePhoneTitle = @"Profile.Phone.Title";
+    NSString * const trProfileEmailTitle = @"Profile.Email.Title";
+    ```
 
 Localization constants help prevent string typos.
 
