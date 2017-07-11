@@ -41,5 +41,15 @@ translation constants.
 
 Clone [sample spreadsheet](https://goo.gl/41wame) to your Google Drive.
 
+## 2. Create new Google API project
+
+![Screenshot](readme/project-title.png)
+![Screenshot](readme/project-created.png)
+
+Go to [Google API console](https://console.developers.google.com) and create a new project.
+
+## 3. Enable Google Drive API
+
+
 
 
