@@ -91,3 +91,91 @@ The JSON you downloaded looks like this:
 To allow the service account to read your spreadsheet, you need to give `client email`
 read permissions to your document. You can do it in sharing settings.
 
+## 6. Generate Android localization files
+
+![Screenshot](readme/android.png)
+
+Go to the directory of your choice and
+generate Android localization files with the following commands:
+
+`cd /path/to/android/project`
+
+`python /path/to/sheet-localization/main.py /path/to/service_account_credentials.json 'Spreadsheet name' android`
+
+This creates `res/values-<lang>/strings.xml` files with contents like this:
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="history">History</string>
+<string name="notifications">Notifications</string>
+<string name="favorite_places">Favourite places</string>
+<string name="about">About</string>
+<string name="wait_map_tag">wait_map_tag</string>
+<string name="main_title_order"></string>
+<string name="order_detail_title"></string>
+<string name="action_im_here">I'm here</string>
+<string name="action_get_order">Order</string>
+</resources>
+```
+
+## 7. Generate iOS localization files
+
+![Screenshot](readme/ios.png)
+
+Go to the directory of your choice and
+generate iOS localization files with the following commands:
+
+`cd /path/to/android/project`
+
+`python /path/to/sheet-localization/main.py /path/to/service_account_credentials.json 'Spreadsheet name' ios`
+
+This creates
+
+0. `<lang>.lproj/Localizable.strings` files with contents like this:
+    ```
+    "Menu.Item.History" = "History";
+    "Menu.Item.Notifications" = "Notifications";
+    "Menu.Item.Favourites" = "Favourite places";
+    "Menu.Item.About" = "About";
+    "Profile.Email.Title" = "Email";
+    "Profile.BirthDate.Title" = "Birth date";
+    "Profile.ChangeAvatar.Title" = "Another photo";
+    "Order.Address.Here" = "I'm here";
+    "Details.Order" = "Order";
+    ```
+0. `LocalizationConstants.h` file with contents:
+    ```
+    /*!
+    * @b en@: History
+
+    * @b ru@: История
+
+    * @b uk@: Історія
+
+    */
+    extern NSString * const trMenuItemHistory;
+
+    /*!
+    * @b en@: Notifications
+
+    * @b ru@: Уведомления
+
+    * @b uk@: Сповіщення
+
+    */
+    extern NSString * const trMenuItemNotifications;
+    ```
+0. `LocalizationConstants.m` file with contents:
+```
+import "LocalizableConstants.h"
+NSString * const trMenuItemHistory = @"Menu.Item.History";
+NSString * const trMenuItemNotifications = @"Menu.Item.Notifications";
+NSString * const trMenuItemFavourites = @"Menu.Item.Favourites";
+NSString * const trMenuItemAbout = @"Menu.Item.About";
+NSString * const trProfilePhoneTitle = @"Profile.Phone.Title";
+NSString * const trProfileEmailTitle = @"Profile.Email.Title";
+```
+
+Localization constants help prevent string typos.
+
