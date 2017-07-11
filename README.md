@@ -26,11 +26,28 @@ You generally run `sheet-localization` like this:
 The script also generates `LocalizationConstants.h`, `LocalizationConstants.m` files with
 translation constants.
 
-# Dependencies
+# Installation
 
-1. Google service account
-1. The account must be given read permission to a spreadsheet
-1. gspread 
+The scripts require Python 2.7+.
+
+1. Linux
+   TODO
+
+1. Windows
+   TODO
+
+1. macOS
+   1. Upgrade `six` package
+
+      `sudo easy_install -U six`
+
+   1. Install `pip` package manager
+
+      `sudo easy_install pip`
+
+   1. Install `gspread` package
+     
+      `sudo -H pip install --upgrade gspread`
 
 # Step by step guide
 
