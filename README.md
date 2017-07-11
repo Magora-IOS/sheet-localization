@@ -50,6 +50,13 @@ Go to [Google API console](https://console.developers.google.com) and create a n
 
 ## 3. Enable Google Drive API
 
+![Screenshot](readme/enable-api-locate.png)
+![Screenshot](readme/enable-api-enable.png)
+![Screenshot](readme/enable-api-done.png)
+
+Enable Google Drive API.
+
+## 4. Create service account
 
 
 
