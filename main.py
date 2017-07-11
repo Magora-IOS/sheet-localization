@@ -56,4 +56,3 @@ else:
     print("ERROR: Unknown target")
     sys.exit(1)
 
-
