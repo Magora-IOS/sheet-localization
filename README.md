@@ -30,6 +30,16 @@ translation constants.
 
 1. Google service account
 1. The account must be given read permission to a spreadsheet
-1. gspread installation
+1. gspread 
+
+# Step by step guide
+
+## 1. Clone sample Google spreadsheet
+
+![Screenshot](readme/clone-action.png)
+![Screenshot](readme/clone-title.png)
+
+Clone [sample spreadsheet](https://goo.gl/41wame) to your Google Drive.
+
 
 
