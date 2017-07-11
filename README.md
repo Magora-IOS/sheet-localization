@@ -70,3 +70,24 @@ Upon account creation you should get a special JSON, which contains all necessar
 
 ## 5. Allow service account to read the spreadsheet document
 
+![Screenshot](readme/share.png)
+
+The JSON you downloaded looks like this:
+```
+{
+  "type": "service_account",
+  "project_id": "localization-173405",
+  "private_key_id": "d37cdb95af7f817a05c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCO8ACoDvAG0q8R\xg3bQzHYCVrEDBcBFkfJ4d8dfy9FdIS++p3XvmLOWnFyMreQTPh1\njmx7jdmDpEwZHNZrj2dYYf0Xta8A0wxdejqUmNq4CyOBqTzomqCdzu36qBp8szUk\nN1l9G9u+rLcm9J/BlinOeA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "localization@localization-173405.iam.gserviceaccount.com",
+  "client_id": "1016040",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/localization%40localization-173405.iam.gserviceaccount.com"
+}
+```
+
+To allow the service account to read your spreadsheet, you need to give `client email`
+read permissions to your document. You can do it in sharing settings.
+
