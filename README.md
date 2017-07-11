@@ -121,7 +121,7 @@ This creates `res/values-<lang>/strings.xml` files with contents like this:
 
 ## 7. Generate iOS localization files
 
-![Screenshot](readme/ios.png)
+![Screenshot](readme/ios_run.png)
 
 Go to the directory of your choice and
 generate iOS localization files with the following commands:
