@@ -1,6 +1,8 @@
 from Common import *
-from IOS import *
 from Spreadsheet import Spreadsheet
+
+from Android import *
+from IOS import *
 
 import sys
 import gspread
@@ -46,7 +48,7 @@ srcPage = spreadsheet.sheet("SRC")
 print("Found languages: '{0}'".format(languages))
 
 if (targetName == "android"):
-    print("TODO: generate Android files")
+    androidGenerateLocalizationFiles(translations, languages)
 elif (targetName == "ios"):
     iosGenerateLocalizationFiles(translations, languages)
     iosGenerateConstantsFiles(translations, languages)
