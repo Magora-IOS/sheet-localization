@@ -45,9 +45,9 @@ The scripts require Python 2.7+.
 
       `sudo easy_install pip`
 
-   1. Install `gspread` package
+   1. Install `gspread` and `oauth2client` packages
      
-      `sudo -H pip install --upgrade gspread`
+      `sudo -H pip install --upgrade gspread oauth2client`
 
 # Step by step guide
 
@@ -57,6 +57,13 @@ The scripts require Python 2.7+.
 ![Screenshot](readme/clone-title.png)
 
 Clone [sample spreadsheet](https://goo.gl/41wame) to your Google Drive.
+
+The sample document contains two mandatory pages:
+
+1. `SRC` contains translations and keys
+2. `CFG` contains configurations where keys are located and what row translations start at
+
+These pages are required by the script, so make sure to keep them.
 
 ## 2. Create new Google API project
 
