@@ -58,5 +58,15 @@ Enable Google Drive API.
 
 ## 4. Create service account
 
+![Screenshot](readme/credentials-type.png)
+![Screenshot](readme/credentials-title.png)
+![Screenshot](readme/credentials-json.png)
 
+Create service account credentials for a `Web server` to access `Application data`
+
+Name the service account and give it `Project -> Editor` role.
+
+Upon account creation you should get a special JSON, which contains all necessary credentials.
+
+## 5. Allow service account to read the spreadsheet document
 
