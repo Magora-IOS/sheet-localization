@@ -3,6 +3,9 @@
 
 `sheet-localization` generates Android / iOS localization files from single Google Spreadsheet.
 
+![Screenshot](readme/android.png)
+![Screenshot](readme/ios_run.png)
+
 # Command line parameters
 
 You generally run `sheet-localization` like this:
