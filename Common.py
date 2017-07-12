@@ -33,6 +33,9 @@ def parsePage(page, cfg):
         languages.append(raw[languagesRowId][columnId])
 
     translationRowId = int(cfg["TRANSLATION_ROW"]) - 1
+    # Comments column ids.
+    commentKeyColumnId = int(cfg["COMMENT_KEY_COLUMN"]) - 1
+    groupCommentKeyColumnId = int(cfg["GROUP_COMMENT_KEY_COLUMN"]) - 1
     # Key column ids.
     androidKeyColumnId = int(cfg["ANDROID_KEY_COLUMN"]) - 1
     iosKeyColumnId = int(cfg["IOS_KEY_COLUMN"]) - 1
@@ -44,9 +47,16 @@ def parsePage(page, cfg):
         if (rowId < translationRowId):
             continue
         tr = Translation()
-        # Get keys.
-        tr.androidKey = raw[rowId][androidKeyColumnId]
-        tr.iosKey = raw[rowId][iosKeyColumnId]
+        # Comment keys.
+        comment = raw[rowId][commentKeyColumnId]
+        tr.comment = comment if len(comment) else None
+        groupComment = raw[rowId][groupCommentKeyColumnId]
+        tr.groupComment = groupComment if len(groupComment) else None
+        # Platform keys.
+        androidKey = raw[rowId][androidKeyColumnId]
+        tr.androidKey = androidKey if len(androidKey) else None
+        iosKey = raw[rowId][iosKeyColumnId]
+        tr.iosKey = iosKey if len(iosKey) else None
         # Get translations.
         for columnId in range(translationsColumnId, languagesNb):
             # NOTE The use of encode("utf-8") fixes the following error:

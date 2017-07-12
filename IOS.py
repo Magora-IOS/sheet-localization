@@ -4,30 +4,34 @@ import os
 IOS_LOCALIZATION_DIR_NAME_MASK = "{0}.lproj"
 IOS_LOCALIZATION_FILE_NAME = "Localizable.strings"
 
+IOS_LOCALIZATION_GROUP_COMMENT_FORMAT = "/* {0} */\n"
 IOS_LOCALIZATION_FORMAT = "\"{0}\" = \"{1}\";\n"
 
 IOS_CONSTANTS_HEADER_FILE_NAME = "LocalizationConstants.h"
 IOS_CONSTANTS_SOURCE_FILE_NAME = "LocalizationConstants.m"
 
+IOS_CONSTANTS_HEADER_HEADER = "#import <Foundation/Foundation.h>\n\n"
 IOS_CONSTANTS_HEADER_CONST_FORMAT = "extern NSString * const {0};\n"
 IOS_CONSTANTS_HEADER_DESC_START_FORMAT = "\n/*!\n"
 IOS_CONSTANTS_HEADER_DESC_END_FORMAT = "*/\n"
 IOS_CONSTANTS_HEADER_COMM_FORMAT = "* {0}\n\n"
 IOS_CONSTANTS_HEADER_LANG_FORMAT = "* @b {0}@: {1}\n\n"
 
-IOS_CONSTANTS_SOURCE_HEADER = "import \"LocalizableConstants.h\"\n"
+IOS_CONSTANTS_SOURCE_HEADER = "#import \"LocalizationConstants.h\"\n\n"
 IOS_CONSTANTS_SOURCE_FORMAT = "NSString * const {0} = @\"{1}\";\n"
 
 def iosConstants(translations, languages):
-    header = ""
+    header = IOS_CONSTANTS_HEADER_HEADER
     source = IOS_CONSTANTS_SOURCE_HEADER
     for tr in translations:
         # Ignore empty keys.
-        if (not len(tr.iosKey)):
+        if (tr.iosKey is None):
             continue
         # Constant description.
         header += IOS_CONSTANTS_HEADER_DESC_START_FORMAT
-        # TODO: Add comments.
+        # Comment.
+        if (tr.comment):
+            header += IOS_CONSTANTS_HEADER_COMM_FORMAT.format(tr.comment)
         for languageId in range(0, len(languages)):
             language = languages[languageId]
             header += IOS_CONSTANTS_HEADER_LANG_FORMAT.format(language, tr.translations[languageId])
@@ -66,8 +70,9 @@ def iosLocalization(translations, languageId):
     contents = ""
     for tr in translations:
         # Ignore empty keys.
-        if (not len(tr.iosKey)):
+        if (tr.iosKey is None):
             continue
-        # TODO: Add comments.
+        if (tr.groupComment):
+            contents += IOS_LOCALIZATION_GROUP_COMMENT_FORMAT.format(tr.groupComment)
         contents += IOS_LOCALIZATION_FORMAT.format(tr.iosKey, tr.translations[languageId])
     return contents

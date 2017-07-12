@@ -28,7 +28,7 @@ def androidLocalization(translations, languageId):
     contents = ANDROID_LOCALIZATION_HEADER
     for tr in translations:
         # Ignore empty keys.
-        if (not len(tr.androidKey)):
+        if (tr.androidKey is None):
             continue
         # TODO: Add comments.
         contents += ANDROID_LOCALIZATION_FORMAT.format(tr.androidKey, tr.translations[languageId])
