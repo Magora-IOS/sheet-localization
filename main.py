@@ -16,7 +16,7 @@ Usage: {0} /path/to/google_credentials.json SPREADSHEET_NAME TARGET
         If it contains whitespaces, use '' around the name.
 
     TARGET
-        Valid options are: 'android', 'ios'
+        Valid options are: 'android', 'ios', 'ios-swift'
 """
 
 # Make sure we have all necessary parameters specified at command line.
@@ -52,6 +52,9 @@ if (targetName == "android"):
 elif (targetName == "ios"):
     iosGenerateLocalizationFiles(translations, languages)
     iosGenerateConstantsFiles(translations, languages)
+elif (targetName == "ios-swift"):
+    iosGenerateLocalizationFiles(translations, languages)
+    iosGenerateSwiftConstantsFile(translations, languages)
 else:
     print("ERROR: Unknown target")
     sys.exit(1)
