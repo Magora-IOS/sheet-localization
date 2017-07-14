@@ -42,7 +42,7 @@ IOS_CONSTANTS_SWIFT_EXT_FOOTER = """
 \t}
 }
 
-func tr(key: L10n) -> String {
+func tr(_ key: L10n) -> String {
 \treturn key.string
 }
 
