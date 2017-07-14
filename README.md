@@ -19,18 +19,26 @@ You generally run `sheet-localization` like this:
    **Note**: Google service account must be given read permission to access the spreadsheet
    by sharing the document with the service account's email
 
-1. `TargetName` is either `android` or `ios`.
+1. `TargetName` can be one of `android`, `ios`, or `ios-swift`.
 
-# Android generated files
+# Targets
+## `android` target
 
 `sheet-localization` generates `res/value-<lang>/strings.xml` hierarchy in the current directory.
 
-# iOS generated files
+## `ios` target
 
 `sheet-localization` generates `<lang>.lproj/Localizable.strings` hierarchy in the current directory.
 
 The script also generates `LocalizationConstants.h`, `LocalizationConstants.m` files with
 translation constants.
+
+## `ios-swift` target
+
+`sheet-localization` generates `<lang>.lproj/Localizable.strings` hierarchy in the current directory.
+
+The script also generates `LocalizationConstants.swift` files with translation constants
+(actually, enum).
 
 # Installation
 
@@ -208,4 +216,56 @@ This creates
     ```
 
 Localization constants help prevent string typos.
+
+## 8. Generate iOS localization files for Swift
+
+If you use `ios-swift` target, you get single `LocalizationConstants.swift`,
+which looks like this:
+```
+import Foundation
+
+enum L10n {
+    case MenuItemHistory
+    case MenuItemNotifications
+    case MenuItemFavourites
+    case MenuItemAbout
+}
+
+
+extension L10n: CustomStringConvertible {
+    var description: String { return self.string }
+
+    var string: String {
+        switch self {
+            case .MenuItemHistory:
+                return L10n.tr(key: "Menu.Item.History")
+            case .MenuItemNotifications:
+                return L10n.tr(key: "Menu.Item.Notifications")
+            case .MenuItemFavourites:
+                return L10n.tr(key: "Menu.Item.Favourites")
+            case .MenuItemAbout:
+                return L10n.tr(key: "Menu.Item.About")
+        }
+    }
+
+    private static func tr(key: String, _ args: CVarArg...) -> String {
+        let format = NSLocalizedString(key, bundle: Bundle(for: BundleToken.self), comment: "")
+        return String(format: format, locale: Locale.current, arguments: args)
+    }
+}
+
+func tr(_ key: L10n) -> String {
+    return key.string
+}
+
+private final class BundleToken {}
+```
+
+**Note**: file format is similar to what [SwiftGen](https://github.com/SwiftGen/SwiftGen)
+generates.
+
+You can later reference such a constant in code like this:
+```
+self.yourTextField.text = tr(.MenuItemAbout)
+```
 
