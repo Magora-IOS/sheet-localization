@@ -1,38 +1,38 @@
 
 import os
 
-IOS_LOCALIZATION_DIR_NAME_MASK = "{0}.lproj"
-IOS_LOCALIZATION_FILE_NAME = "Localizable.strings"
+IOS_LOCALIZATION_DIR_NAME_MASK = u"{0}.lproj"
+IOS_LOCALIZATION_FILE_NAME = u"Localizable.strings"
 
-IOS_LOCALIZATION_GROUP_COMMENT_FORMAT = "/* {0} */\n"
-IOS_LOCALIZATION_FORMAT = "\"{0}\" = \"{1}\";\n"
+IOS_LOCALIZATION_GROUP_COMMENT_FORMAT = u"/* {0} */\n"
+IOS_LOCALIZATION_FORMAT = u"\"{0}\" = \"{1}\";\n"
 
-IOS_CONSTANTS_HEADER_FILE_NAME = "LocalizationConstants.h"
-IOS_CONSTANTS_SOURCE_FILE_NAME = "LocalizationConstants.m"
+IOS_CONSTANTS_HEADER_FILE_NAME = u"LocalizationConstants.h"
+IOS_CONSTANTS_SOURCE_FILE_NAME = u"LocalizationConstants.m"
 
-IOS_CONSTANTS_HEADER_HEADER = "#import <Foundation/Foundation.h>\n\n"
-IOS_CONSTANTS_HEADER_CONST_FORMAT = "extern NSString * const {0};\n"
-IOS_CONSTANTS_HEADER_DESC_START_FORMAT = "\n/*!\n"
-IOS_CONSTANTS_HEADER_DESC_END_FORMAT = "*/\n"
-IOS_CONSTANTS_HEADER_COMM_FORMAT = "* {0}\n\n"
-IOS_CONSTANTS_HEADER_LANG_FORMAT = "* @b {0}@: {1}\n\n"
+IOS_CONSTANTS_HEADER_HEADER = u"#import <Foundation/Foundation.h>\n\n"
+IOS_CONSTANTS_HEADER_CONST_FORMAT = u"extern NSString * const {0};\n"
+IOS_CONSTANTS_HEADER_DESC_START_FORMAT = u"\n/*!\n"
+IOS_CONSTANTS_HEADER_DESC_END_FORMAT = u"*/\n"
+IOS_CONSTANTS_HEADER_COMM_FORMAT = u"* {0}\n\n"
+IOS_CONSTANTS_HEADER_LANG_FORMAT = u"* @b {0}@: {1}\n\n"
 
-IOS_CONSTANTS_SOURCE_HEADER = "#import \"LocalizationConstants.h\"\n\n"
-IOS_CONSTANTS_SOURCE_FORMAT = "NSString * const {0} = @\"{1}\";\n"
+IOS_CONSTANTS_SOURCE_HEADER = u"#import \"LocalizationConstants.h\"\n\n"
+IOS_CONSTANTS_SOURCE_FORMAT = u"NSString * const {0} = @\"{1}\";\n"
 
-IOS_CONSTANTS_SWIFT_FILE_NAME = "LocalizationConstants.swift"
-IOS_CONSTANTS_SWIFT_ENUM_HEADER = "import Foundation\n\nenum L10n {\n"
-IOS_CONSTANTS_SWIFT_ENUM_ITEM_FORMAT = "\tcase {0}\n"
-IOS_CONSTANTS_SWIFT_ENUM_FOOTER = "}\n\n"
-IOS_CONSTANTS_SWIFT_EXT_HEADER = """
+IOS_CONSTANTS_SWIFT_FILE_NAME = u"LocalizationConstants.swift"
+IOS_CONSTANTS_SWIFT_ENUM_HEADER = u"import Foundation\n\nenum L10n {\n"
+IOS_CONSTANTS_SWIFT_ENUM_ITEM_FORMAT = u"\tcase {0}\n"
+IOS_CONSTANTS_SWIFT_ENUM_FOOTER = u"}\n\n"
+IOS_CONSTANTS_SWIFT_EXT_HEADER = u"""
 extension L10n: CustomStringConvertible {
 \tvar description: String { return self.string }
 
 \tvar string: String {
 \t\tswitch self {
 """
-IOS_CONSTANTS_SWIFT_EXT_ITEM_FORMAT = "\t\t\tcase .{0}:\n\t\t\t\treturn L10n.tr(key: \"{1}\")\n"
-IOS_CONSTANTS_SWIFT_EXT_FOOTER = """
+IOS_CONSTANTS_SWIFT_EXT_ITEM_FORMAT = u"\t\t\tcase .{0}:\n\t\t\t\treturn L10n.tr(key: \"{1}\")\n"
+IOS_CONSTANTS_SWIFT_EXT_FOOTER = u"""
 \t\t}
 \t}
 
@@ -93,7 +93,7 @@ def iosGenerateConstantsFiles(translations, languages):
     headerFileName = IOS_CONSTANTS_HEADER_FILE_NAME
     print("Generating iOS constants file '{0}'".format(headerFileName))
     with open(headerFileName, "w") as f:
-        f.write(header)
+        f.write(header.encode("utf-8"))
     sourceFileName = IOS_CONSTANTS_SOURCE_FILE_NAME
     print("Generating iOS constants file '{0}'".format(sourceFileName))
     with open(sourceFileName, "w") as f:
@@ -128,4 +128,4 @@ def iosLocalization(translations, languageId):
         if (tr.groupComment):
             contents += IOS_LOCALIZATION_GROUP_COMMENT_FORMAT.format(tr.groupComment)
         contents += IOS_LOCALIZATION_FORMAT.format(tr.iosKey, tr.translations[languageId])
-    return contents
+    return contents.encode("utf-8")
